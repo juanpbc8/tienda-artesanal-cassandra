@@ -6,11 +6,12 @@ Este proyecto implementa una base de datos distribuida para una tienda artesanal
 
 ## Estructura del Proyecto
 
-Dockerfile # Imagen personalizada de Cassandra con autenticación
-cassandra.yaml # Archivo de configuración con autenticacion activada
-docker-compose.yml # Define los nodos del clúster Cassandra
-scripts_cql/ # Scripts de creación de keyspace, tablas, índices.
-scripts_python/ # Scripts para simular funciones o procedimientos
+Dockerfile: Imagen personalizada de Cassandra con autenticación
+
+cassandra.yaml: Archivo de configuración con autenticacion activada
+docker-compose.yml: Define los nodos del clúster Cassandra
+scripts_cql/: Scripts de creación de keyspace, tablas, índices.
+scripts_python/: Scripts para simular funciones o procedimientos
 
 ---
 
@@ -28,8 +29,8 @@ scripts_python/ # Scripts para simular funciones o procedimientos
 docker build -t cassandra-auth .
 ```
 
-La imagen se basa en cassandra:4.1.3 y usa cassandra.yaml personalizado con:
-Autenticación habilitada
+La imagen se basa en cassandra:4.1.3 y usa cassandra.yaml personalizado con
+Autenticación habilitada:
 
 authenticator: PasswordAuthenticator
 authorizer: CassandraAuthorizer
