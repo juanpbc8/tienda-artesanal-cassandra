@@ -1,0 +1,63 @@
+services:
+  nodo-centro:
+    image: cassandra-auth
+    container_name: centro
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TiendaArtesanal
+      - CASSANDRA_DC=centro
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=256M
+    networks:
+      - tienda-red
+    volumes:
+      - ./data/centro:/var/lib/cassandra
+      - ./logs/centro:/var/log/cassandra
+
+  nodo-norte:
+    image: cassandra-auth
+    container_name: norte
+    ports:
+      - "9043:9042"
+    depends_on:
+      - nodo-centro
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TiendaArtesanal
+      - CASSANDRA_DC=norte
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_SEEDS=centro
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=256M
+    networks:
+      - tienda-red
+    volumes:
+      - ./data/norte:/var/lib/cassandra
+      - ./logs/norte:/var/log/cassandra
+
+  nodo-sur:
+    image: cassandra-auth
+    container_name: sur
+    ports:
+      - "9044:9042"
+    depends_on:
+      - nodo-centro
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TiendaArtesanal
+      - CASSANDRA_DC=sur
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_SEEDS=centro
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=256M
+    networks:
+      - tienda-red
+    volumes:
+      - ./data/sur:/var/lib/cassandra
+      - ./logs/sur:/var/log/cassandra
+
+networks:
+  tienda-red:
