@@ -9,8 +9,11 @@ Este proyecto implementa una base de datos distribuida para una tienda artesanal
 Dockerfile: Imagen personalizada de Cassandra con autenticación
 
 cassandra.yaml: Archivo de configuración con autenticacion activada
+
 docker-compose.yml: Define los nodos del clúster Cassandra
+
 scripts_cql/: Scripts de creación de keyspace, tablas, índices.
+
 scripts_python/: Scripts para simular funciones o procedimientos
 
 ---
